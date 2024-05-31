@@ -1,9 +1,13 @@
 $(document).ready(function() {
+  var currency;
+
   // for all money_input classes
   $('.money_input').each(function () {
-    // get moneu input
+    // get money input
     const moneyInput = $(this);
-    
+    // get currency
+    currency = moneyInput.attr("currency");
+
     // create formatted input    
     const formattedInput = $('<input>').attr({
       type: 'text',
@@ -50,5 +54,18 @@ $(document).ready(function() {
     updateFormattedInput();
     hideMoneyInput();
 
+});
+
+
+// Format number to string money
+function moneyformat(number) {
+  number = parseFloat(number);
+  // Create our number formatter.
+  var formatter = new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: currency,
   });
+  return formatter.format(number);
+}
+
 });
